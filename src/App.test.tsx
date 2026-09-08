@@ -4,8 +4,8 @@ import App from "./App.tsx";
 describe("App component", () => {
   it("contains hero", () => {
     const component = render(<App />);
-    const hero = component.getByLabelText("hero");
+    const paper = component.getByLabelText("paper");
 
-    expect(hero).toBeInTheDocument();
+    expect(paper).toBeInTheDocument();
   });
 });
