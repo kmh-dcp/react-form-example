@@ -11,3 +11,7 @@
     gap: 18px;
   }
 }
+
+.hugContents {
+  display: inline-block;
+}
