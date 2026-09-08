@@ -1,10 +1,10 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import App from "./App.tsx";
 
-describe("App component", () => {
-  it("contains hero", () => {
-    const component = render(<App />);
-    const paper = component.getByLabelText("paper");
+describe("App", () => {
+  it("contains Paper component", () => {
+    render(<App />);
+    const paper = screen.getByLabelText("paper");
 
     expect(paper).toBeInTheDocument();
   });
