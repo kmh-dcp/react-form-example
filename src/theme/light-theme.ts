@@ -1,12 +1,8 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import AppTheme from "./theme.ts";
 
 const lightTheme = createTheme({
-  typography: {
-    h1: {
-      fontSize: "2.0rem",
-      lineHeight: 1.2,
-    },
-  },
+  ...AppTheme,
 });
 
 export default responsiveFontSizes(lightTheme);
