@@ -1,10 +1,14 @@
-import { Paper } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import "./App.css";
 
 function App() {
-  // Component
-
-  return <Paper aria-label="paper">Hello World</Paper>;
+  return (
+    <Paper aria-label="paper">
+      <Typography aria-label="header" variant="h1">
+        React Form Example
+      </Typography>
+    </Paper>
+  );
 }
 
 export default App;
