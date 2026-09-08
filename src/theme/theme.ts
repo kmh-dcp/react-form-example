@@ -8,8 +8,41 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           boxSizing: "border-box",
+          display: "flex",
+          flexDirection: "column",
+          gap: 1.25 * increment,
           padding: increment,
         },
+      },
+    },
+    MuiInputLabel: {
+      defaultProps: {
+        shrink: true,
+      },
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "&.MuiInputLabel-shrink": {
+            backgroundColor:
+              theme.palette.mode === "light"
+                ? theme.palette.background.paper
+                : "#1e1e1e",
+            marginLeft: -5,
+            paddingLeft: 4,
+            paddingRight: 4,
+          },
+        }),
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: 0.5 * increment,
+        },
+      },
+    },
+    MuiStack: {
+      defaultProps: {
+        spacing: 1,
       },
     },
   },

@@ -7,6 +7,7 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
+import ReactFormExample from "./ReactFormExample";
 import type { SxProps, Theme } from "@mui/material";
 import type { ChangeEvent } from "react";
 import LightTheme from "./theme/light-theme.ts";
@@ -49,6 +50,7 @@ function App() {
           <Typography aria-label="header" variant="h1" className="hugContents">
             React Form Example
           </Typography>
+          <ReactFormExample />
         </Paper>
       </Stack>
     </ThemeProvider>
