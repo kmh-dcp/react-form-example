@@ -1,13 +1,11 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import AppTheme from "./theme.ts";
 
-const lightTheme = createTheme({
+const darkTheme = createTheme({
   ...AppTheme,
   palette: {
-    background: {
-      default: "#f5f5f5",
-    },
+    mode: "dark",
   },
 });
 
-export default responsiveFontSizes(lightTheme);
+export default responsiveFontSizes(darkTheme);
