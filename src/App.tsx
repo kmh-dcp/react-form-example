@@ -22,7 +22,7 @@ function App() {
 
   // Actions
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const switchDidToggle = (event: ChangeEvent<HTMLInputElement>) => {
     const toggle = event.target.checked;
     setTheme(toggle ? LightTheme : DarkTheme);
   };
@@ -61,7 +61,7 @@ function App() {
       <CssBaseline />
       <Stack sx={sxViewport}>
         <Box>
-          <Switch onChange={onChange} {...switchProps} defaultChecked />
+          <Switch onChange={switchDidToggle} {...switchProps} defaultChecked />
         </Box>
         <Paper aria-label="paper" sx={sxPaper}>
           <Typography aria-label="header" variant="h1" className="hugContents">
