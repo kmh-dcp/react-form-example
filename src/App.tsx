@@ -20,6 +20,9 @@ import "./App.css";
 function App() {
   const [theme, setTheme] = useState<Theme>(LightTheme);
   const [formData, setFormData] = useState<FormExampleData>({});
+  const [formDisabledFields, setFormDisabledFields] = useState<
+    (keyof FormExampleData)[]
+  >(["state"]);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [showFormWarning, setShowFormWarning] = useState<boolean>(false);
 
@@ -35,6 +38,8 @@ function App() {
     if (key === "lastName" && value.length) {
       setFormErrors({});
       setShowFormWarning(false);
+    } else if (key === "country") {
+      setFormDisabledFields(value.length ? [] : ["state"]);
     }
     // TODO: perform validations
   };
@@ -96,6 +101,7 @@ function App() {
             {...formData}
             didChangeValue={didChangeValue}
             onSubmit={onSubmit}
+            disabledFields={formDisabledFields}
             formErrors={formErrors}
           />
         </Paper>

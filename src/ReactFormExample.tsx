@@ -1,21 +1,20 @@
 import { Button } from "@mui/material";
 import PersonFields, { type PersonFieldsData } from "./PersonFields";
+import LocationFields, { type LocationFieldsData } from "./LocationFields";
 
-export type FormExampleData = PersonFieldsData & {
-  city?: string;
-  state?: string;
-  country?: string;
-};
+export type FormExampleData = PersonFieldsData & LocationFieldsData;
 
 export type FormExampleProps = {
   didChangeValue?: (key: keyof FormExampleData, value: string) => void;
   onSubmit?: (data: FormExampleData) => void;
+  disabledFields?: (keyof FormExampleData)[];
   formErrors?: Record<string, string>;
 };
 
 function ReactFormExample({
   didChangeValue,
   onSubmit,
+  disabledFields,
   formErrors,
   ...formFields
 }: FormExampleProps & FormExampleData) {
@@ -24,8 +23,15 @@ function ReactFormExample({
     lastName: formFields.lastName,
   };
 
+  const locationData: LocationFieldsData = {
+    city: formFields.city,
+    state: formFields.state,
+    country: formFields.country,
+  };
+
   const formData: FormExampleData = {
     ...personData,
+    ...locationData,
   };
 
   // Component
@@ -35,6 +41,12 @@ function ReactFormExample({
       <PersonFields
         {...personData}
         didChangeValue={didChangeValue}
+        formErrors={formErrors}
+      />
+      <LocationFields
+        {...locationData}
+        didChangeValue={didChangeValue}
+        disabledFields={disabledFields}
         formErrors={formErrors}
       />
       <Button
