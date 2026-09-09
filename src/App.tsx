@@ -19,6 +19,20 @@ function App() {
   const [theme, setTheme] = useState<Theme>(LightTheme);
   const [formData, setFormData] = useState<FormExampleData>({});
 
+  // Actions
+
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const toggle = event.target.checked;
+    setTheme(toggle ? LightTheme : DarkTheme);
+  };
+
+  const didChangeValue = (key: keyof FormExampleData, value: string) => {
+    setFormData({ ...formData, [key]: value });
+    // TODO: perform validations
+  };
+
+  // Styles
+
   const sxViewport: SxProps<Theme> = {
     marginY: (theme: Theme) => theme.spacing(1),
   };
@@ -26,12 +40,6 @@ function App() {
   const sxPaper: SxProps = {
     textAlign: "left",
   };
-
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const toggle = event.target.checked;
-    setTheme(toggle ? LightTheme : DarkTheme);
-  };
-
   const switchProps = {
     slotProps: {
       input: {
@@ -40,10 +48,7 @@ function App() {
     },
   };
 
-  const didChangeValue = (key: keyof FormExampleData, value: string) => {
-    setFormData({ ...formData, [key]: value });
-    // TODO: perform validations
-  };
+  // Component
 
   return (
     <ThemeProvider theme={theme}>

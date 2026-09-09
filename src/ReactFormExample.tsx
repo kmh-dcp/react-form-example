@@ -2,6 +2,8 @@ import { useState } from "react";
 import type { ChangeEventHandler, FocusEventHandler } from "react";
 import { Stack, TextField } from "@mui/material";
 
+// TODO: add error state setting
+
 export type FormExampleData = {
   firstName?: string;
   lastName?: string;
@@ -19,6 +21,8 @@ function ReactFormExample({
     firstName: formFields.firstName ?? "",
     lastName: formFields.lastName ?? "",
   });
+
+  // Actions
 
   const onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (
     event,
@@ -41,6 +45,8 @@ function ReactFormExample({
     return;
   };
 
+  // Styles
+
   const sxFirstName = {
     width: 300,
   };
@@ -48,6 +54,8 @@ function ReactFormExample({
   const sxLastName = {
     flexGrow: 1,
   };
+
+  // Component
 
   return (
     <Stack direction="row">
