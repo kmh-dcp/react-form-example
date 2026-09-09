@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { ChangeEventHandler, FocusEventHandler } from "react";
-import { Stack, TextField } from "@mui/material";
+import { Button, Stack, TextField } from "@mui/material";
 
 // TODO: add error state setting
 
@@ -11,11 +11,13 @@ export type FormExampleData = {
 
 export type FormExampleProps = {
   didChangeValue?: (key: keyof FormExampleData, value: string) => void;
+  onSubmit?: (data: FormExampleData) => void;
   formErrors?: Record<string, string>;
 };
 
 function ReactFormExample({
   didChangeValue,
+  onSubmit,
   formErrors,
   ...formFields
 }: FormExampleProps & FormExampleData) {
@@ -60,29 +62,39 @@ function ReactFormExample({
   // Component
 
   return (
-    <Stack direction="row">
-      <TextField
-        label="First name"
-        name="firstName"
-        value={data.firstName}
-        helperText={formErrors?.firstName}
-        error={!!formErrors?.firstName}
-        sx={sxFirstName}
-        onChange={onChange}
-        onBlur={onBlur}
-      />
-      <TextField
-        label="Last name"
-        name="lastName"
-        value={data.lastName}
-        helperText={formErrors?.lastName}
-        error={!!formErrors?.lastName}
-        sx={sxLastName}
-        onChange={onChange}
-        onBlur={onBlur}
-        required
-      />
-    </Stack>
+    <>
+      <Stack direction="row">
+        <TextField
+          label="First name"
+          name="firstName"
+          value={data.firstName}
+          helperText={formErrors?.firstName}
+          error={!!formErrors?.firstName}
+          sx={sxFirstName}
+          onChange={onChange}
+          onBlur={onBlur}
+        />
+        <TextField
+          label="Last name"
+          name="lastName"
+          value={data.lastName}
+          helperText={formErrors?.lastName}
+          error={!!formErrors?.lastName}
+          sx={sxLastName}
+          onChange={onChange}
+          onBlur={onBlur}
+          required
+        />
+      </Stack>
+      <Button
+        onClick={() => {
+          return onSubmit ? onSubmit(data) : undefined;
+        }}
+        variant="contained"
+      >
+        Submit
+      </Button>
+    </>
   );
 }
 

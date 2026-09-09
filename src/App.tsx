@@ -32,6 +32,11 @@ function App() {
     // TODO: perform validations
   };
 
+  const onSubmit = (data: FormExampleData) => {
+    // TODO: process form submission here
+    console.log("[onSubmit]", data);
+  };
+
   // Styles
 
   const sxViewport: SxProps<Theme> = {
@@ -65,6 +70,7 @@ function App() {
           <ReactFormExample
             {...formData}
             didChangeValue={didChangeValue}
+            onSubmit={onSubmit}
             formErrors={formErrors}
           />
         </Paper>
