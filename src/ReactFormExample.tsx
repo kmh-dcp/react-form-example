@@ -1,10 +1,5 @@
 import { useState } from "react";
-import type {
-  ChangeEventHandler,
-  Dispatch,
-  FocusEventHandler,
-  SetStateAction,
-} from "react";
+import type { ChangeEventHandler, FocusEventHandler } from "react";
 import { Stack, TextField } from "@mui/material";
 
 export type FormExampleData = {
@@ -13,14 +8,16 @@ export type FormExampleData = {
 };
 
 function ReactFormExample({ ...formFields }: FormExampleData) {
-  const [firstName, setFirstName] = useState(formFields.firstName ?? "");
-  const [lastName, setLastName] = useState(formFields.lastName ?? "");
+  const [data, setData] = useState<FormExampleData>({
+    firstName: formFields.firstName ?? "",
+    lastName: formFields.lastName ?? "",
+  });
 
   const onChange = (
-    setter: Dispatch<SetStateAction<string>>,
+    key: string,
   ): ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> => {
     return (event) => {
-      setter(event.target.value);
+      setData({ ...data, [key]: event.target.value });
     };
   };
 
@@ -42,16 +39,16 @@ function ReactFormExample({ ...formFields }: FormExampleData) {
     <Stack direction="row">
       <TextField
         label="First name"
-        value={firstName}
+        value={data.firstName}
         sx={sxFirstName}
-        onChange={onChange(setFirstName)}
+        onChange={onChange("firstName")}
         onBlur={onBlur}
       />
       <TextField
         label="Last name"
-        value={lastName}
+        value={data.lastName}
         sx={sxLastName}
-        onChange={onChange(setLastName)}
+        onChange={onChange("lastName")}
         onBlur={onBlur}
         required
       />
