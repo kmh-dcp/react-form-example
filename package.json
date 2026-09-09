@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "format": "prettier --write .",
+    "format": "eslint --fix && prettier --write .",
     "test": "cross-env TZ=America/New_York vitest run --coverage",
     "preview": "vite preview",
     "prepare": "husky"
