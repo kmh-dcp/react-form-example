@@ -42,6 +42,7 @@ function App() {
 
   const didChangeValue = (key: keyof FormExampleData, value: string) => {
     setFormData({ ...formData, [key]: value });
+    // TODO: perform validations
   };
 
   return (
