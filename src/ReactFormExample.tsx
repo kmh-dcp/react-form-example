@@ -24,7 +24,7 @@ function ReactFormExample({ ...formFields }: FormExampleData) {
   const onBlur:
     | FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>
     | undefined = () => {
-    // TODO: propogate values back to parent component
+    // TODO: propagate values back to parent component
   };
 
   const sxFirstName = {
