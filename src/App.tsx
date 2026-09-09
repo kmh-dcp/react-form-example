@@ -32,6 +32,10 @@ function App() {
 
   const didChangeValue = (key: keyof FormExampleData, value: string) => {
     setFormData({ ...formData, [key]: value });
+    if (key === "lastName" && value.length) {
+      setFormErrors({});
+      setShowFormWarning(false);
+    }
     // TODO: perform validations
   };
 
