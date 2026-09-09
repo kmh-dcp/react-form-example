@@ -21,6 +21,7 @@ function ReactFormExample({
   formErrors,
   ...formFields
 }: FormExampleProps & FormExampleData) {
+  // This is the "ground truth" state of the form, though you can pass in initial values via props.
   const [data, setData] = useState<FormExampleData>({
     firstName: formFields.firstName ?? "",
     lastName: formFields.lastName ?? "",
