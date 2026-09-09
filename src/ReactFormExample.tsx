@@ -1,12 +1,9 @@
-import { useState } from "react";
-import type { ChangeEventHandler, FocusEventHandler } from "react";
-import { Button, Stack, TextField } from "@mui/material";
+import { Button } from "@mui/material";
+import PersonFields, { type PersonFieldsData } from "./PersonFields";
 
-// TODO: add error state setting
-
-export type FormExampleData = {
-  firstName?: string;
-  lastName?: string;
+export type FormExampleData = PersonFieldsData & {
+  city?: string;
+  state?: string;
 };
 
 export type FormExampleProps = {
@@ -21,75 +18,27 @@ function ReactFormExample({
   formErrors,
   ...formFields
 }: FormExampleProps & FormExampleData) {
-  // This is the "ground truth" state of the form, though you can pass in initial values via props.
-  const [data, setData] = useState<FormExampleData>({
-    firstName: formFields.firstName ?? "",
-    lastName: formFields.lastName ?? "",
-  });
-
-  // Actions
-
-  const onChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (
-    event,
-  ) => {
-    setData({ ...data, [event.target.name]: event.target.value });
+  const personData: PersonFieldsData = {
+    firstName: formFields.firstName,
+    lastName: formFields.lastName,
   };
 
-  const onBlur:
-    FocusEventHandler<HTMLInputElement | HTMLTextAreaElement> | undefined = (
-    event,
-  ) => {
-    if (!didChangeValue) return;
-
-    const key = event.target.name as keyof FormExampleData;
-    const oldValue = formFields[key];
-    const newValue = data[key];
-    if (oldValue !== newValue) {
-      didChangeValue(key, newValue!);
-    }
-    return;
-  };
-
-  // Styles
-
-  const sxFirstName = {
-    width: 300,
-  };
-
-  const sxLastName = {
-    flexGrow: 1,
+  const formData: FormExampleData = {
+    ...personData,
   };
 
   // Component
 
   return (
     <>
-      <Stack direction="row">
-        <TextField
-          label="First name"
-          name="firstName"
-          value={data.firstName}
-          helperText={formErrors?.firstName}
-          error={!!formErrors?.firstName}
-          sx={sxFirstName}
-          onChange={onChange}
-          onBlur={onBlur}
-        />
-        <TextField
-          label="Last name"
-          name="lastName"
-          value={data.lastName}
-          helperText={formErrors?.lastName}
-          error={!!formErrors?.lastName}
-          sx={sxLastName}
-          onChange={onChange}
-          onBlur={onBlur}
-          required
-        />
-      </Stack>
+      <PersonFields
+        {...personData}
+        didChangeValue={didChangeValue}
+        formErrors={formErrors}
+      />
       <Button
         onClick={() => {
-          return onSubmit ? onSubmit(data) : undefined;
+          return onSubmit ? onSubmit(formData) : undefined;
         }}
         variant="contained"
       >
