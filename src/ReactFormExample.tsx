@@ -11,10 +11,12 @@ export type FormExampleData = {
 
 export type FormExampleProps = {
   didChangeValue?: (key: keyof FormExampleData, value: string) => void;
+  formErrors?: Record<string, string>;
 };
 
 function ReactFormExample({
   didChangeValue,
+  formErrors,
   ...formFields
 }: FormExampleProps & FormExampleData) {
   const [data, setData] = useState<FormExampleData>({
@@ -63,6 +65,8 @@ function ReactFormExample({
         label="First name"
         name="firstName"
         value={data.firstName}
+        helperText={formErrors?.firstName}
+        error={!!formErrors?.firstName}
         sx={sxFirstName}
         onChange={onChange}
         onBlur={onBlur}
@@ -71,6 +75,8 @@ function ReactFormExample({
         label="Last name"
         name="lastName"
         value={data.lastName}
+        helperText={formErrors?.lastName}
+        error={!!formErrors?.lastName}
         sx={sxLastName}
         onChange={onChange}
         onBlur={onBlur}

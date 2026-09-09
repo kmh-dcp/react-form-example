@@ -18,6 +18,7 @@ import "./App.css";
 function App() {
   const [theme, setTheme] = useState<Theme>(LightTheme);
   const [formData, setFormData] = useState<FormExampleData>({});
+  const [formErrors, _setFormErrors] = useState<Record<string, string>>({});
 
   // Actions
 
@@ -61,7 +62,11 @@ function App() {
           <Typography aria-label="header" variant="h1" className="hugContents">
             React Form Example
           </Typography>
-          <ReactFormExample {...formData} didChangeValue={didChangeValue} />
+          <ReactFormExample
+            {...formData}
+            didChangeValue={didChangeValue}
+            formErrors={formErrors}
+          />
         </Paper>
       </Stack>
     </ThemeProvider>

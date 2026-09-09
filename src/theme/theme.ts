@@ -15,6 +15,16 @@ const theme = createTheme({
         },
       },
     },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          fontSize: "12px",
+          marginLeft: 0,
+          paddingLeft: 10.66,
+          paddingTop: 1,
+        },
+      },
+    },
     MuiInputLabel: {
       defaultProps: {
         shrink: true,
