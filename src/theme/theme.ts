@@ -4,6 +4,13 @@ const increment = 16;
 
 const theme = createTheme({
   components: {
+    MuiChip: {
+      styleOverrides: {
+        label: {
+          paddingTop: 2,
+        },
+      },
+    },
     MuiPaper: {
       styleOverrides: {
         root: {
