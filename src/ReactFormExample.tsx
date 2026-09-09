@@ -4,6 +4,7 @@ import PersonFields, { type PersonFieldsData } from "./PersonFields";
 export type FormExampleData = PersonFieldsData & {
   city?: string;
   state?: string;
+  country?: string;
 };
 
 export type FormExampleProps = {
