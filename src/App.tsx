@@ -7,7 +7,7 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
-import ReactFormExample from "./ReactFormExample";
+import ReactFormExample, { type FormExampleData } from "./ReactFormExample";
 import type { SxProps, Theme } from "@mui/material";
 import type { ChangeEvent } from "react";
 import LightTheme from "./theme/light-theme.ts";
@@ -17,6 +17,7 @@ import "./App.css";
 
 function App() {
   const [theme, setTheme] = useState<Theme>(LightTheme);
+  const [formData, setFormData] = useState<FormExampleData>({});
 
   const sxViewport: SxProps<Theme> = {
     marginY: (theme: Theme) => theme.spacing(1),
@@ -39,6 +40,10 @@ function App() {
     },
   };
 
+  const didChangeValue = (key: keyof FormExampleData, value: string) => {
+    setFormData({ ...formData, [key]: value });
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -50,7 +55,7 @@ function App() {
           <Typography aria-label="header" variant="h1" className="hugContents">
             React Form Example
           </Typography>
-          <ReactFormExample />
+          <ReactFormExample {...formData} didChangeValue={didChangeValue} />
         </Paper>
       </Stack>
     </ThemeProvider>
