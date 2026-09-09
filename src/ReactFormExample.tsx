@@ -2,8 +2,6 @@ import { useState } from "react";
 import type { ChangeEventHandler, FocusEventHandler } from "react";
 import { Button, Stack, TextField } from "@mui/material";
 
-// TODO: add error state setting
-
 export type FormExampleData = {
   firstName?: string;
   lastName?: string;
