@@ -88,6 +88,7 @@ function ReactFormExample({
         />
       </Stack>
       <Button
+        aria-label="react-form-example-submit-button"
         onClick={() => {
           return onSubmit ? onSubmit(data) : undefined;
         }}
