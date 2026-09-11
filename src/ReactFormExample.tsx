@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { ChangeEventHandler, FocusEventHandler } from "react";
 import { Button, Stack, TextField } from "@mui/material";
+import { type StandardProps } from "./SharedUtils.ts";
 
 export type FormExampleData = {
   firstName?: string;
@@ -14,11 +15,12 @@ export type FormExampleProps = {
 };
 
 function ReactFormExample({
+  "aria-label": ariaLabel,
   didChangeValue,
   onSubmit,
   formErrors,
   ...formFields
-}: FormExampleProps & FormExampleData) {
+}: StandardProps & FormExampleProps & FormExampleData) {
   // This is the "ground truth" state of the form, though you can pass in initial values via props.
   const [data, setData] = useState<FormExampleData>({
     firstName: formFields.firstName ?? "",
@@ -61,7 +63,7 @@ function ReactFormExample({
   // Component
 
   return (
-    <>
+    <Stack aria-label={ariaLabel}>
       <Stack direction="row">
         <TextField
           label="First name"
@@ -93,7 +95,7 @@ function ReactFormExample({
       >
         Submit
       </Button>
-    </>
+    </Stack>
   );
 }
 

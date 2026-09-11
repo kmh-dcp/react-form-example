@@ -15,9 +15,10 @@ import type { ChangeEvent } from "react";
 import LightTheme from "./theme/light-theme.ts";
 import DarkTheme from "./theme/dark-theme.ts";
 import CssBaseline from "@mui/material/CssBaseline";
+import { type StandardProps } from "./SharedUtils.ts";
 import "./App.css";
 
-function App() {
+function App({ "aria-label": ariaLabel }: StandardProps) {
   const [theme, setTheme] = useState<Theme>(LightTheme);
   const [formData, setFormData] = useState<FormExampleData>({});
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
@@ -68,7 +69,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Stack sx={sxViewport}>
+      <Stack aria-label={ariaLabel} sx={sxViewport}>
         <Box>
           <Switch onChange={switchDidToggle} {...switchProps} defaultChecked />
         </Box>
