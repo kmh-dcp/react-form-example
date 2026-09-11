@@ -42,7 +42,7 @@ function ReactFormExample({
     if (!didChangeValue) return;
 
     const key = event.target.name as keyof FormExampleData;
-    const oldValue = formFields[key];
+    const oldValue = formFields[key] ?? "";
     const newValue = data[key];
     if (oldValue !== newValue) {
       didChangeValue(key, newValue!);
