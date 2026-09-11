@@ -15,22 +15,42 @@ import type { ChangeEvent } from "react";
 import LightTheme from "./theme/light-theme.ts";
 import DarkTheme from "./theme/dark-theme.ts";
 import CssBaseline from "@mui/material/CssBaseline";
+import { type StandardProps } from "./SharedUtils.ts";
 import "./App.css";
 
-function App() {
-  const [theme, setTheme] = useState<Theme>(LightTheme);
+// TODO: Refactor ThemeProvider out into parent component for testability
+
+type AppProps = {
+  darkTheme?: boolean;
+  themeDidChange?: (theme: string) => void;
+  showFormWarning?: boolean;
+};
+
+function App({
+  themeDidChange,
+  "aria-label": ariaLabel,
+  ...props
+}: AppProps & StandardProps) {
+  const [theme, setTheme] = useState<Theme>(
+    props.darkTheme ? DarkTheme : LightTheme,
+  );
   const [formData, setFormData] = useState<FormExampleData>({});
   const [formDisabledFields, setFormDisabledFields] = useState<
     (keyof FormExampleData)[]
   >(["state"]);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
-  const [showFormWarning, setShowFormWarning] = useState<boolean>(false);
+  const [showFormWarning, setShowFormWarning] = useState<boolean>(
+    props.showFormWarning ?? false,
+  );
 
   // Actions
 
   const switchDidToggle = (event: ChangeEvent<HTMLInputElement>) => {
     const toggle = event.target.checked;
     setTheme(toggle ? LightTheme : DarkTheme);
+    if (themeDidChange) {
+      themeDidChange(toggle ? "light" : "dark");
+    }
   };
 
   const didChangeValue = (key: keyof FormExampleData, value: string) => {
@@ -73,9 +93,14 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Stack sx={sxViewport}>
+      <Stack aria-label={ariaLabel} sx={sxViewport}>
         <Box>
-          <Switch onChange={switchDidToggle} {...switchProps} defaultChecked />
+          <Switch
+            aria-label="theme-switch"
+            onChange={switchDidToggle}
+            {...switchProps}
+            defaultChecked
+          />
         </Box>
         <Paper aria-label="paper" sx={sxPaper}>
           <Stack direction="row" sx={{ justifyContent: "space-between" }}>

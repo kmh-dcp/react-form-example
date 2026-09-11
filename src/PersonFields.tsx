@@ -4,6 +4,7 @@ import {
   type FocusEventHandler,
   useState,
 } from "react";
+import { type StandardProps } from "./SharedUtils.ts";
 
 export type PersonFieldsData = {
   firstName?: string;
@@ -16,10 +17,11 @@ type PersonFieldsProps = {
 };
 
 function PersonFields({
+  "aria-label": ariaLabel,
   didChangeValue,
   formErrors,
   ...formFields
-}: PersonFieldsProps & PersonFieldsData) {
+}: PersonFieldsProps & PersonFieldsData & StandardProps) {
   // This is the "ground truth" state of these fields, though you can pass in initial values via props.
   const [data, setData] = useState<PersonFieldsData>({
     firstName: formFields.firstName ?? "",
@@ -41,7 +43,7 @@ function PersonFields({
     if (!didChangeValue) return;
 
     const key = event.target.name as keyof PersonFieldsData;
-    const oldValue = formFields[key];
+    const oldValue = formFields[key] ?? "";
     const newValue = data[key];
     if (oldValue !== newValue) {
       didChangeValue(key, newValue!);
@@ -62,7 +64,7 @@ function PersonFields({
   // Component
 
   return (
-    <>
+    <Stack aria-label={ariaLabel}>
       <Typography>Person</Typography>
       <Stack direction="row">
         <TextField
@@ -87,7 +89,7 @@ function PersonFields({
           required
         />
       </Stack>
-    </>
+    </Stack>
   );
 }
 

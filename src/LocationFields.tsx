@@ -4,6 +4,7 @@ import {
   type FocusEventHandler,
   useState,
 } from "react";
+import { type StandardProps } from "./SharedUtils.ts";
 
 export type LocationFieldsData = {
   city?: string;
@@ -18,11 +19,12 @@ type LocationFieldsProps = {
 };
 
 function LocationFields({
+  "aria-label": ariaLabel,
   didChangeValue,
   disabledFields,
   formErrors,
   ...formFields
-}: LocationFieldsProps & LocationFieldsData) {
+}: LocationFieldsProps & LocationFieldsData & StandardProps) {
   // These are the "ground truth" states of these form fields, though you can pass in initial values via props.
   const [data, setData] = useState<LocationFieldsData>({
     city: formFields.city ?? "",
@@ -51,7 +53,7 @@ function LocationFields({
     if (!didChangeValue) return;
 
     const key = event.target.name as keyof LocationFieldsData;
-    const oldValue = formFields[key];
+    const oldValue = formFields[key] ?? "";
     const newValue = data[key];
     if (oldValue !== newValue) {
       didChangeValue(key, newValue!);
@@ -76,7 +78,7 @@ function LocationFields({
   // Component
 
   return (
-    <>
+    <Stack aria-label={ariaLabel}>
       <Typography>Location</Typography>
       <Stack direction="row">
         <TextField
@@ -114,7 +116,7 @@ function LocationFields({
           disabled={isDisabled("country")}
         />
       </Stack>
-    </>
+    </Stack>
   );
 }
 
